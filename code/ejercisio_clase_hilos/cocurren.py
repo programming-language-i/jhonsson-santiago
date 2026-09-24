@@ -1,4 +1,4 @@
-import threading, time
+import multiprocessing, time
 
 def print_numbers():
     for i in range(1, 6):
@@ -11,11 +11,11 @@ def print_letters():
         time.sleep(1)
 
 if __name__ == "__main__":
-    h1 = threading.Thread(target=print_numbers)
-    h2 = threading.Thread(target=print_letters)
+    p1 = multiprocessing.Process(target=print_numbers)
+    p2 = multiprocessing.Process(target=print_letters)
+    
+    p1.start()
+    p2.start()
 
-    h1.start()
-    h2.start()
-
-    h1.joint()
-    h2.joint()
+    p1.join()
+    p2.join()
