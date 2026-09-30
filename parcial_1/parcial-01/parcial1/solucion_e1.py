@@ -1,7 +1,7 @@
 #E1
 import threading
 import time
-
+#tiempode lecutra de cada dato 
 SENSORES = [("T1", 5, 20), ("H1", 3, 60), ("P1", 4, 1000)]
 TIEMPO_LECTURA = 0.3
 
