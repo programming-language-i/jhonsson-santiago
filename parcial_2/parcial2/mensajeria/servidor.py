@@ -58,8 +58,8 @@ def atender(
 ) -> None:
     """Atiende a UN cliente, en su propio hilo, hasta que se desconecta."""
     nombre = None
+    registrado_exitosamente = False  # Bandera para controlar el borrado seguro
     try:
-        # Requisito 2: La primera trama del cliente es su nombre
         nombre = recibir_mensaje(conexion)
         if not nombre:
             conexion.close()
@@ -70,6 +70,9 @@ def atender(
             enviar_mensaje(conexion, "ERROR: nombre en uso")
             conexion.close()
             return
+            
+        # Si llegó aquí, el registro fue exitoso
+        registrado_exitosamente = True
         enviar_mensaje(conexion, "OK")
 
         while True:
@@ -81,7 +84,7 @@ def atender(
     except (socket.error, Exception):
         pass
     finally:
-        if nombre:
+        if registrado_exitosamente and nombre:
             registro.borrar(nombre)
         try:
             conexion.close()
