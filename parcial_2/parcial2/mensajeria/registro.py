@@ -20,7 +20,6 @@ import threading
 
 class RegistroClientes:
     def __init__(self) -> None:
-        # Diccionario interno para almacenar nombre -> conexion
         self._clientes: dict[str, socket.socket] = {}
         # Lock de exclusión mutua para proteger el acceso concurrente
         self._lock = threading.Lock()
